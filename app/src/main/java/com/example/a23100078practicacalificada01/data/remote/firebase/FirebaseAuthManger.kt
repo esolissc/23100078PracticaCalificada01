@@ -13,7 +13,6 @@ object FirebaseAuthManger {
     suspend fun registerUser(email: String,
                              name: String,
                              lastName: String,
-                             phone: String,
                              password: String):
     Result<Unit>{
         return try {
@@ -25,7 +24,6 @@ object FirebaseAuthManger {
                 "email" to email,
                 "name" to name,
                 "lastName" to lastName,
-                "phone" to phone,
             )
             firestore.collection("users").document(uid).set(user).await()
             Result.success(Unit)
