@@ -49,15 +49,24 @@ fun NavGraph(navController: NavHostController) {
         // ---- Pantalla de Conversión ----
         composable(Routes.CONVERSION) {
             ConversionScreen(
-                onNavigateToHistorial = {
-                    navController.navigate(Routes.HISTORIAL)
+                onNavigateToHistorial = { navController.navigate(Routes.HISTORIAL) },
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(Routes.CONVERSION) { inclusive = true }
+                    }
                 }
             )
         }
 
         // ---- Pantalla de Historial ----
         composable(Routes.HISTORIAL) {
-            HistorialScreen()
+            HistorialScreen(
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(Routes.HISTORIAL) { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }
